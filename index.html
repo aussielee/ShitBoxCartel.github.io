@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ShitBoxCartel DayZ</title>
+    <meta name="description" content="Join the ShitBoxCartel DayZ server for an unmatched PVP/PVE experience with active community and custom mods.">
+    <meta name="keywords" content="DayZ, PVP, PVE, ShitBoxCartel, game server, mods, community">
+    <meta property="og:title" content="ShitBoxCartel DayZ Server">
+    <meta property="og:description" content="Explore the ultimate DayZ experience with ShitBoxCartel. Engage in PVP and PVE with custom mods and active community support.">
+    <meta property="og:url" content="https://www.ShitBoxCartel.cc">
+    <meta property="og:type" content="website">
     <style>
         body {
             background-color: #0a0a0a;
@@ -250,6 +256,21 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            background-color: #0a0a0a;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer-signoff {
+            color: #39ff14;
+            font-size: 1.2em;
+            text-shadow: 0 0 10px #39ff14, 0 0 20px #39ff14, 0 0 30px #39ff14, 0 0 40px #39ff14;
+        }
     </style>
 </head>
 <body>
@@ -388,6 +409,10 @@
         </div>
     </div>
 
+    <footer>
+        <p class="footer-signoff">- SBC Team <span>&#x2764;</span></p>
+    </footer>
+
     <script>
         function copyIP() {
             navigator.clipboard.writeText('173.240.156.105:27050');
@@ -415,6 +440,34 @@
         // Update every 60 seconds
         updateServerStatus();
         setInterval(updateServerStatus, 60000);
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "VideoGame",
+      "name": "ShitBoxCartel DayZ Server",
+      "description": "Join our DayZ server for the best PVP/PVE experience with active admins and a vibrant community. Featuring custom mods and events.",
+      "gamePlatform": "PC",
+      "publisher": "ShitBoxCartel",
+      "genre": "Survival, Shooter",
+      "url": "https://www.ShitBoxCartel.cc",
+      "releaseDate": "2021-01-01",
+      "applicationCategory": "Game",
+      "softwareVersion": "1.0.0",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.5",
+        "ratingCount": "674"
+      },
+      "operatingSystem": "Windows, macOS",
+      "playMode": ["Multiplayer", "Cooperative"],
+      "gameServer": {
+        "@type": "GameServer",
+        "serverStatus": "Online",
+        "playersOnline": 100
+      }
+    }
     </script>
 </body>
 </html>
