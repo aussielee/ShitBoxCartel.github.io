@@ -184,6 +184,72 @@
                 margin: 20px;
             }
         }
+
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .status-card {
+            background: rgba(20,20,20,0.8);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid #ff3e3e;
+        }
+
+        .status-card h3 {
+            color: #ff3e3e;
+            margin: 0 0 10px 0;
+        }
+
+        .status-card span {
+            font-size: 1.2em;
+            color: #fff;
+        }
+
+        .discord-section {
+            text-align: center;
+            padding: 40px 20px;
+            margin: 40px auto;
+            max-width: 1200px;
+        }
+
+        .discord-section h2 {
+            color: #ff3e3e;
+            margin-bottom: 20px;
+        }
+
+        .discord-button {
+            display: inline-flex;
+            align-items: center;
+            background: #5865F2;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 1.2em;
+            transition: background 0.3s ease;
+        }
+
+        .discord-button:hover {
+            background: #4752C4;
+        }
+
+        .discord-button img {
+            height: 24px;
+            margin-right: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .status-grid {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
@@ -284,33 +350,27 @@
         </div>
     </div>
 
-    <div class="content-section">
-        <h2 class="section-title">Join Our Community</h2>
-        <div class="discord-container">
-            <iframe 
-                src="https://discord.com/widget?id=SXHsQXEwaT&theme=dark" 
-                width="350" 
-                height="500" 
-                allowtransparency="true" 
-                frameborder="0" 
-                sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts">
-            </iframe>
-        </div>
-    </div>
-
-    <div class="server-stats">
-        <div class="stat-box">
+    <div class="status-grid">
+        <div class="status-card">
             <h3>Players Online</h3>
             <span id="playerCount">Loading...</span>
         </div>
-        <div class="stat-box">
+        <div class="status-card">
             <h3>Server Status</h3>
             <span id="serverStatus">Loading...</span>
         </div>
-        <div class="stat-box">
-            <h3>Last Restart</h3>
-            <span id="lastRestart">Loading...</span>
+        <div class="status-card">
+            <h3>Last Update</h3>
+            <span id="lastUpdate">Loading...</span>
         </div>
+    </div>
+
+    <div class="discord-section">
+        <h2>Join Our Community</h2>
+        <a href="https://discord.gg/SXHsQXEwaT" class="discord-button" target="_blank">
+            <img src="https://assets-global.website-files.com/6257adef93867e50d84d30e2/636e0a6a49cf127bf92de1e2_icon_clyde_white_RGB.png" alt="">
+            Join Discord
+        </a>
     </div>
 
     <div class="features">
@@ -333,6 +393,28 @@
             navigator.clipboard.writeText('173.240.156.105:27050');
             alert('Server IP copied to clipboard!');
         }
+
+        const BATTLEMETRICS_SERVER_ID = '30579415';
+
+        async function updateServerStatus() {
+            try {
+                const response = await fetch(`https://api.battlemetrics.com/servers/${BATTLEMETRICS_SERVER_ID}`);
+                const data = await response.json();
+                
+                document.getElementById('playerCount').textContent = `${data.data.attributes.players}/80`;
+                document.getElementById('serverStatus').textContent = data.data.attributes.status === "online" ? "Online" : "Offline";
+                document.getElementById('lastUpdate').textContent = new Date().toLocaleTimeString();
+            } catch (error) {
+                console.error('Error fetching server status:', error);
+                document.getElementById('playerCount').textContent = 'Unavailable';
+                document.getElementById('serverStatus').textContent = 'Unavailable';
+                document.getElementById('lastUpdate').textContent = 'Unavailable';
+            }
+        }
+
+        // Update every 60 seconds
+        updateServerStatus();
+        setInterval(updateServerStatus, 60000);
     </script>
 </body>
 </html>
